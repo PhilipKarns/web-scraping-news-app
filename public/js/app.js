@@ -24,20 +24,47 @@ $("#scrape-articles").on("click", function() {
 
 // });//save
 
-// $(document).on("click", "p", function() {
-// 	//empty the notes
-// 	$("#notes").empty();
-// 	//save id from p tag
-// 	var thisId = $(this).attr("data-id");
+$(document).on("click", "p", function() {
+	//empty the notes
+	$("#notes").empty();
+	//save id from p tag
+	var thisId = $(this).attr("data-id");
 
-// 	//ajax call for the article
-// 	$.ajax({
-// 		method: "GET",
-// 		url: "/articles/" + thisId
-// 	})
-// 	.done(function(data) {
-// 		console.log(data);
-		
-// 	});
+	//ajax call for the article
+	$.ajax({
+		method: "GET",
+		url: "/articles/" + thisId
+	})
+	.done(function(data) {
+		console.log(data);
+		//title of the article
+		$("#notes").append("<h2>" + data.title + "</h2>");
+		//an input to enter a new note title
+		$("#notes").append("<input id='titleinput' name='title'>");
+		//a textarea to add a new note body
+		$("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+		//a button to submit a new note, with the id of the article saved to it
+		$("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+	});//done
+});//click
 
-// });//
+$(document).on("click", "#savenote", function() {
+	var thisId = $(this).attr("data-id");
+
+	$.ajax({
+		method: "POST",
+		url: "/articles/" + thisId,
+		data: {
+			title: $("#titleinput").val(),
+			body: $("#bodyinput").val()
+		}//data
+	})//ajax
+	.done(function(data) {
+		console.log(data);
+		//$("notes").empty();
+	});
+
+	$("#titleinput").val("");
+	$("#bodyinput").val("");
+
+});//document

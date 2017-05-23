@@ -44,8 +44,6 @@ db.once("open", function() {
 
 //GET request to scrape the NYT website and save the data to the database
 app.get("/scrape", function(req, res) {
-
-
 	request("https://www.nytimes.com/", function(error, response, html) {
 		//load the html into cheerio
 		var $ = cheerio.load(html);
@@ -78,6 +76,7 @@ app.get("/scrape", function(req, res) {
 	res.send("Scrape Complete");
 });//.get
 
+//get all articles
 app.get("/articles", function(req, res) {
 	Article.find({}, function(error, found) {
 		if(error) {
@@ -88,6 +87,43 @@ app.get("/articles", function(req, res) {
 		}
 	});//find
 });//get
+
+//get articles by ID
+app.get("/articles/:id", function(req, res) {
+	Article.findOne({"_id": req.params.id})
+	.populate("note")
+	.exec(function(error, doc) {
+		if(error) {
+			console.log(error);
+		}
+		else {
+			res.json(doc);
+			console.log(doc);
+		}
+	});
+});
+
+//post note to article by id
+app.post("/articles/:id", function (req, res) {
+	var newNote = new Note(req.body);
+	newNote.save(function(err, doc) {
+		if(err) {
+			res.send(err);
+		}
+		else {
+			Article.findOneAndUpdate({"_id": req.params.id}, {"note": doc._id}, {upsert:true})
+				.exec(function(err, doc) {
+					if(err) {
+						console.log(err);
+					}
+					else {
+						res.send(doc);
+					}
+				})//exec
+		}//else
+	})//save
+})//post
+
 
 // Listen on port 3000
 app.listen(3000, function() {
