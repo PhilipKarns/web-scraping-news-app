@@ -1,5 +1,5 @@
 #center {
-    height: 800px;
+    height: 200px;
     background: url(../images/newspaper.jpg);
     background-size: cover;
     width: 100%;
@@ -9,7 +9,7 @@
     text-align: center;
     width: 1200px;
     margin: 0 auto;
-    height: 400px;
+    height: 200px;
 }
 
 #results {

@@ -26,7 +26,7 @@ $("#scrape-articles").on("click", function() {
 
 $(document).on("click", "p", function() {
 	//empty the notes
-	$("#notes").empty();
+	//$("#notes").empty();
 	//save id from p tag
 	var thisId = $(this).attr("data-id");
 
@@ -40,15 +40,20 @@ $(document).on("click", "p", function() {
 		//title of the article
 		$("#notes").append("<h2>" + data.title + "</h2>");
 		//an input to enter a new note title
-		$("#notes").append("<input id='titleinput' name='title'>");
+		$("#notes").append("<input id='titleinput' name='title'><br>");
 		//a textarea to add a new note body
-		$("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+		$("#notes").append("<textarea id='bodyinput' name='body'></textarea><br>");
 		//a button to submit a new note, with the id of the article saved to it
-		$("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+		$("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button><br>");
+		//Display all notes for that article
+      	//for (var i = 0; i < data.note.length; i++) {
+      		$("#notes").append("<p> Title: " + data.note.title + "<br>" + "Body: " + data.note.body + "</p>");
+      	//}//for
 	});//done
 });//click
 
 $(document).on("click", "#savenote", function() {
+	//grab id associated with article from button
 	var thisId = $(this).attr("data-id");
 
 	$.ajax({
@@ -61,7 +66,7 @@ $(document).on("click", "#savenote", function() {
 	})//ajax
 	.done(function(data) {
 		console.log(data);
-		//$("notes").empty();
+		$("#notes").empty();
 	});
 
 	$("#titleinput").val("");

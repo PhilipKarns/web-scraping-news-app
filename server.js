@@ -88,6 +88,8 @@ app.get("/articles", function(req, res) {
 	});//find
 });//get
 
+//app.get("/notes")
+
 //get articles by ID
 app.get("/articles/:id", function(req, res) {
 	Article.findOne({"_id": req.params.id})
