@@ -1,0 +1,17 @@
+#center {
+    height: 800px;
+    background: url(../images/newspaper.jpg);
+    background-size: cover;
+    width: 100%;
+}
+
+#text-center {
+    text-align: center;
+    width: 1200px;
+    margin: 0 auto;
+    height: 400px;
+}
+
+#results {
+	width: 100%;
+}
