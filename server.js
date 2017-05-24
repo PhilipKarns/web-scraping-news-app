@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/webScraperHomework");
+mongoose.connect("mongodb://heroku_ldmd2zww:7864n8dgcq76lqrguvrdna3tbb@ds153521.mlab.com:53521/heroku_ldmd2zww");
 var db = mongoose.connection;
 
 // Show any mongoose errors
