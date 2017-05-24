@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://heroku_ldmd2zww:7864n8dgcq76lqrguvrdna3tbb@@ds151431.mlab.com:51431/heroku_8r3btq1p");
+mongoose.connect("mongodb://heroku_ldmd2zww:7864n8dgcq76lqrguvrdna3tbb@ds151431.mlab.com:51431/heroku_8r3btq1p");
 var db = mongoose.connection;
 
 // Show any mongoose errors
